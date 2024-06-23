@@ -1,0 +1,77 @@
+{% extends './base.html' %}
+{% load static %}
+{% load custom_filters %}
+{% block title %}
+    Login | Page
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h2 class="text-center mb-4">Unlock Your Potential: Log In to Access Premium Courses</h2>
+            <div class="card shadow-sm p-4 rounded-lg">
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        {{ form.username.label_tag }}
+                        {{ form.username }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.password.label_tag }}
+                        {{ form.password }}
+                    </div>
+                    <div class="d-grid">
+                        <input type="submit" class="btn btn-primary btn-lg" value="Login">
+                    </div>
+                </form>
+            </div>
+            <div class="text-center mt-3">
+                <p>Don't have an account? <a href="{% url 'signup' %}" class="text-primary">Sign up</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block css%}
+<style>
+    .container h2 {
+        color: #343a40;
+        font-size: 1.75rem;
+        font-weight: bold;
+    }
+    .card {
+        border: none;
+        border-radius: 10px;
+    }
+    .card h2 {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #343a40;
+    }
+    .form-label {
+        font-weight: bold;
+        color: #555;
+    }
+    .form-control {
+        border-radius: 5px;
+    }
+    .btn-primary {
+        background-color: #007bff;
+        border: none;
+        transition: background-color 0.3s ease-in-out;
+    }
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+    .text-primary {
+        color: #007bff !important;
+    }
+    .text-primary:hover {
+        color: #0056b3 !important;
+    }
+</style>
+
+
+{% endblock %}

@@ -1,0 +1,173 @@
+{% extends './base.html' %}
+{% load custom_filters %}
+{% load static %}
+{% block title %}
+upSkillWithUs | HOME
+{% endblock %}
+{% block content %}
+<!-- Hero Section -->
+<div class="hero">
+    <div class="container">
+        <h1>Welcome to UpSkillWithUs</h1>
+        <p>Empower Your Future with Our Courses</p>
+        <br>
+        <br>
+        <div class="search-bar">
+            <input type="text" class="form-control" placeholder="Search for courses...">
+        </div>
+    </div>
+</div>
+
+
+<!-- All Courses -->
+<h2 class="mt-5 mb-4">All Courses</h2>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for course in courses %}
+    <div class="col mb-4">
+        <div class="card cards h-100">
+            <img src="{{ course.thumbnail.url }}" class="card-img-top" alt="{{ course.name }}">
+            <div class="card-body">
+                <h5 class="card-title cards-tit">{{ course.name }}</h5>
+                <p class="card-text cards-tex">
+                    Save {{ course.discount }}%
+                    <br>
+                    <span class="text-muted text-mut">
+                        <del>₹ {{ course.price }}</del>
+                    </span>
+                    <span class="text-success text-succ ms-2">₹ {{ course.price|discounted_price:course.discount }}</span>
+                </p>
+                {% if course.id in enrolled_courses %}
+                    <p class="text-success">Enrolled</p>
+                {% endif %}
+            </div>
+            <div class="card-footer bg-transparent border-0">
+                <div class="d-grid gap-2">
+                    {% if course.id in enrolled_courses %}
+                        <a href="{% url 'coursepage' course.slug %}" class="btn btn-prime">Start Course</a>
+                    {% else %}
+                        <a href="{% url 'confirm_enrollment' course.slug %}" class="btn btn-roll">Enroll Now</a>
+                        <a href="/course/{{ course.slug }}" class="btn btn-showmore mt-2">Show More</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- Quotes -->
+<div class="quotes">
+    <p>"UpSkillWithUs has transformed my career. The courses are top-notch and the support is excellent!"</p>
+    <h4>- John Doe</h4>
+</div>
+{% endblock %}
+{% block css %}
+<style>
+     .hero {
+            background: url('static/thumbnail/bg.png') no-repeat center center/cover;
+            color: #ffffff !important;
+            text-align: center !important;
+            padding: 100px 0 !important;
+        }
+
+        .hero h1 {
+            font-size: 3rem !important;
+            font-weight: 700 !important;
+            margin-bottom: 1rem !important;
+        }
+
+        .hero p {
+            font-size: 1.25rem !important;
+        }
+
+        .search-bar {
+            margin-top: -50px !important;
+            position: relative !important;
+            z-index: 10 !important;
+        }
+
+        .search-bar input {
+            height: 50px !important;
+            border-radius: 25px !important;
+            border: none !important;
+            padding: 0 20px !important;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1) !important;
+        }
+
+        .cards {
+            border-radius: 15px !important;
+            overflow: hidden !important;
+            background-color: #ffffff !important;
+            border: none !important;
+        }
+
+        .cards-tit {
+            color: #2c3e50 !important;
+            font-size: 1.5rem !important;
+            font-weight: 700 !important;
+        }
+
+        .cards-tex {
+            font-size: 1.1rem !important;
+            color: #34495e !important;
+        }
+
+        .text-mut {
+            color: #7f8c8d !important;
+        }
+
+        .text-succ {
+            color: #27ae60 !important;
+            font-weight: 700 !important;
+        }
+
+        .btn-roll {
+            background-color: #3498db !important;
+            color: #fff !important;
+            border: none !important;
+            font-size: 1.1rem !important;
+            padding: 10px 20px !important;
+        }
+
+        .btn-roll:hover {
+            background-color: #2980b9 !important;
+        }
+
+        .btn-showmore {
+            background-color: #1abc9c !important;
+            color: #fff !important;
+            border: none !important;
+            font-size: 1.1rem !important;
+            padding: 10px 20px !important;
+        }
+
+        .btn-showmore:hover {
+            background-color: #16a085 !important;
+        }
+
+        .btn-prime {
+            font-size: 1.1rem !important;
+            background-color: #e67e22 !important;
+            border: none !important;
+            padding: 10px 20px !important;
+        }
+
+        .btn-prime:hover {
+            background-color: #d35400 !important;
+        }
+         .quotes {
+            text-align: center !important;
+            margin: 50px 0 !important;
+        }
+
+        .quotes p {
+            font-size: 1.2rem !important;
+            font-style: italic !important;
+        }
+
+        .quotes h4 {
+            margin-top: 10px !important;
+            font-weight: 700 !important;
+        }
+</style>
+{% endblock %}

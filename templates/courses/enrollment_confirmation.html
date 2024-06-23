@@ -1,0 +1,54 @@
+{% extends './base.html' %}
+{% load static %}
+{% load custom_filters %}
+{% block title %}
+    Enrollment Confirmation
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow-lg">
+        <div class="card-header bg-success text-white">
+            <h2>Enrollment Confirmation</h2>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <img src="{{ course.thumbnail.url }}" class="img-fluid rounded" alt="{{ course.name }}">
+                </div>
+                <div class="col-md-8">
+                    <h3>{{ course.name }}</h3>
+                    <p>{{ course.description }}</p>
+                    <p><strong>Price:</strong>
+                        <span class="text-success">₹ {{ course.price|discounted_price:course.discount }}</span>
+                        <span class="text-muted ms-2"><del>₹ {{ course.price }}</del></span>
+                    </p>
+                    <p><strong>Discount:</strong> {{ course.discount }}%</p>
+                    <hr>
+                    <h4>{{ message }}</h4>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer text-end">
+            <a href="{% url 'home' %}" class="btn btn-primary">Back to Courses</a>
+            <a href="{% url 'coursepage' course.slug %}" class="btn btn-secondary">Go to Course</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block css %}
+<style>
+    .card {
+        border-radius: 10px;
+    }
+    .card-header {
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+    .card-footer {
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+</style>
+{% endblock %}

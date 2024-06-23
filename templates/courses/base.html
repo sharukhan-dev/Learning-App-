@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    {% load static %}
+    <title>{% block title %}{% endblock %}</title>
+    {% block css%} {% endblock %}
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap') !important;
+
+        body {
+            font-family: 'Roboto', sans-serif !important;
+            background-color: #f4f4f9 !important;
+            color: #2c3e50 !important;
+        }
+
+        .navbar {
+            background-color: #2c3e50 !important;
+        }
+
+        .navbar-brand,
+        .nav-link {
+            color: #ecf0f1 !important;
+        }
+
+        .nav-link:hover {
+            color: #bdc3c7 !important;
+        }
+
+        .footer {
+            background-color: #2c3e50 !important;
+            color: #ecf0f1 !important;
+            padding: 20px 0 !important;
+            text-align: center !important;
+        }
+
+        .footer a {
+            color: #ecf0f1 !important;
+            margin: 0 10px !important;
+        }
+
+        .footer a:hover {
+            color: #bdc3c7 !important;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">UpSkillWithUs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/">Home</a>
+                    </li>
+                    {% if request.user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout" tabindex="-1" aria-disabled="true">Logout</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/signup">Signup</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+
+<!--Block Content-->
+<div class="container mt-4">
+    {% block content %}
+    {% endblock %}
+</div>
+
+<!--Footer-->
+<div class="footer">
+    <div class="container">
+        <p>&copy; 2024 UpSkillWithUs. All Rights Reserved.</p>
+        <p>
+            <a href="#">About Us</a> | <a href="#">Contact</a> | <a href="#">Privacy Policy</a>
+        </p>
+    </div>
+</div>
+
+<!-- Optional JavaScript; choose one of the two! -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>
