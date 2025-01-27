@@ -16,5 +16,4 @@ class VideoAdmin(admin.TabularInline):
 class CourseAdmin(admin.ModelAdmin):
     inlines = [TagAdmin, PrerequisiteAdmin, LearningAdmin, VideoAdmin]
 
-
 admin.site.register(Course, CourseAdmin)

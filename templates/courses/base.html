@@ -37,6 +37,7 @@
             color: #ecf0f1 !important;
             padding: 20px 0 !important;
             text-align: center !important;
+            margin-top: 100px;
         }
 
         .footer a {
@@ -47,6 +48,8 @@
         .footer a:hover {
             color: #bdc3c7 !important;
         }
+
+    }
     </style>
 </head>
 <body>
@@ -82,6 +85,7 @@
 
 <!--Block Content-->
 <div class="container mt-4">
+    <h3 class="user-greeting mb-auto">Hello, {{request.user}}</h3>
     {% block content %}
     {% endblock %}
 </div>
